@@ -1,0 +1,19 @@
+<div class="row" *ngIf="visibleImages?.length > 0; else noImages">
+  <button class="btn btn-lg btn-info mr-2" [class.active]="filterBy==='all'" (click)="filterBy='all'">All</button>
+  <button class="btn btn-lg btn-info mr-2" [class.active]="filterBy==='car'" (click)="filterBy='car'">Car</button>
+  <button class="btn btn-lg btn-info mr-2" [class.active]="filterBy==='code'" (click)="filterBy='code'">Code</button>
+  <button class="btn btn-lg btn-info" [class.active]="filterBy==='space'" (click)="filterBy='space'">Space</button>
+  <ul id="thumbnailsList">
+    <li *ngFor="let image of (visibleImages | imageFilter:filterBy)">
+      <a [routerLink]="['/image', image.id]">
+        <img src="{{image.url}}" alt="{{image.caption}}" class="tn" width="200" height="200">
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<ng-template #noImages>
+  <hr>
+  <h5>There are no images in the system</h5>
+</ng-template>
